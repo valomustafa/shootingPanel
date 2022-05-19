@@ -1,0 +1,476 @@
+/*------ DEFAULT STYLES ------*/
+@font-face {
+    font-family: "BabelSans";
+    src: url("../fonts/BabelSans.ttf");
+}
+
+.redBottomBorder {
+    -fx-border-color: #E82C0C;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.blackBottomBorder {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.buttonSelected {
+     -fx-font-family: "BabelSans";
+     -fx-font-size: 1.5em;
+     -fx-background-color: black;
+     -fx-text-fill: white;
+     -fx-border-color: black;
+     -fx-border-width: 3px;
+     -fx-border-radius: 15px;
+     -fx-background-radius: 15px;
+ }
+
+.buttonUnselected {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+}
+
+.deleteOn {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: #E82C0C;
+    -fx-text-fill: white;
+    -fx-border-color: #E82C0C;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+.deleteOff {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: white;
+    -fx-text-fill: #E82C0C;
+    -fx-border-color: #E82C0C;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+.genericButton {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.2em;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.genericButton:pressed {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.2em;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*----------- PANES -----------*/
+#logPane, #auxPane, #safePane {
+    -fx-background-color: rgba(255,255,255,.5);
+}
+
+#startPane, #jobBar, #sleepPane, #navPane,
+#barPane, #gearBar, #setTimeBar, #addressBar {
+    -fx-background-color: black;
+}
+
+#totalPane, #setTimePane, #jobInfoPane, #testPane, #shootPane, #addressPane,
+#savePane, #errorPane, #gearBackground, #fireConfirmPane, #shotPlotPane, #colorPane,
+#fileChooserPane, #fileScrollPane, #testContentPane, #cclPane{
+    -fx-background-color: white;
+}
+
+#saveBackground, #errorBackground, #fireConfirmBackground, #addressBackground,
+#colorBackground, #checkFirePane, #gunCountPane, #updatePane, #deletePane {
+    -fx-background-color: rgba(0,0,0,.8);
+}
+
+#errorBarPane, #gunCountLabelPane {
+    -fx-background-color: #E82C0C;
+}
+
+#fireConfirmBarPane, #plugLabelPane, #checkFireLabelPane, #updateMessagePane {
+    -fx-background-color: #5f6265;
+}
+
+#setFirePane {
+    -fx-background-color: transparent;
+}
+
+/*---------- BUTTONS ----------*/
+#gearButton, #gearButton1, #dismissButton, #exitButton, #shootCloseButton, #timeExitButton,
+#gearButton:pressed, #gearButton1:pressed, #dismissButton:pressed, #exitButton:pressed, #shootCloseButton:pressed {
+    -fx-background-color: transparent;
+}
+
+#startButton, #newJobButton, #resumeJobButton {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 2em;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+}
+
+#startButton:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+#abortButton, #armButton, #releaseConfirmButton {
+     -fx-font-family: "BabelSans";
+     -fx-font-size: 1.5em;
+     -fx-background-color: black;
+     -fx-text-fill: white;
+     -fx-border-color: black;
+     -fx-border-width: 3px;
+     -fx-border-radius: 15px;
+     -fx-background-radius: 15px;
+}
+
+#abortButton:pressed, #armButton:pressed, #releaseConfirmButton:pressed {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+#fireButton, #checkConfirmButton, #fileDeleteButton {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: #E82C0C;
+    -fx-text-fill: white;
+    -fx-border-color: #E82C0C;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+#fireButton:pressed, #checkConfirmButton:pressed {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: white;
+    -fx-text-fill: #E82C0C;
+    -fx-border-color: #E82C0C;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+#exportButton, #monthButton, #dayButton,
+#weekButton, #errorOKButton, #resumeButton,
+#blankButton, #updateButton, #yesButton,
+#noButton, #setTimeButton, #saveTimeDateButton,
+#addressButton, #addressOkButton, #addressCancelButton,
+#inventoryButton, #fireModeButton, #jobInfoButton, #releaseCancelButton,
+#checkReleaseButton, #checkFireButton, #plugYesButton, #plugNoButton,
+#postReleaseYesButton, #postReleaseNoButton, #checkCancelButton,
+#deleteConfirmButton, #deleteCancelButton, #nightModeButton, #dayModeButton, .okButton, .cancelButton {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+}
+
+#exportButton:pressed, #monthButton:pressed, #dayButton:pressed,
+#weekButton:pressed, #errorOKButton:pressed, #resumeButton:pressed,
+#blankButton:pressed, #updateButton:pressed, #yesButton:pressed,
+#noButton:pressed, #setTimeButton:pressed, #saveTimeDateButton:pressed,
+#addressButton:pressed, #addressOkButton:pressed, #addressCancelButton:pressed,
+#inventoryButton:pressed, #fireModeButton:pressed, #jobInfoButton:pressed, #releaseCancelButton:pressed,
+#checkReleaseButton:pressed, #checkFireButton:pressed, #plugYesButton:pressed, #plugNoButton:pressed,
+#checkCancelButton:pressed, #checkConfirmButton:pressed, #postReleaseYesButton:pressed,
+#postReleaseNoButton:pressed, #deleteConfirmButton:pressed, #deleteCancelButton:pressed,
+#nightModeButton:pressed, #dayModeButton:pressed, .okButton:pressed, .cancelButton:pressed {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+.colorButton {
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 15px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-pref-width: 109px;
+    -fx-pref-height: 56px;
+}
+
+
+/*---------- LABELS ----------*/
+.label {
+    -fx-font-family: "BabelSans";
+}
+
+#connectionIndicator {
+    -fx-padding: 4px;
+    -fx-background-color: #929292;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+}
+
+#timeoutLabel {
+    -fx-font-size: 5em;
+}
+
+#instruction1, #instruction2, #instruction3 {
+    -fx-font-weight: bold;
+    -fx-font-size: 2.2em;
+}
+
+#shootLabel {
+    -fx-font-size: 7em;
+}
+
+#totalSwitchLabel {
+    -fx-padding: -40 0 -40 0;
+    -fx-font-size: 6em;
+}
+
+#batteryPercentage, #date, #saveLabel,
+#errorLabel, #gearLabel, #nameLabel,
+#versionLabel, #fireConfirmLabel, #setTimeLabel,
+#setTimeDateLabel, #addressLabel, #addressChangeLabel,
+#serialNumberLabel, #testIdLabel, #ipLabel,
+#companyInfoLabel, #wellInfoLabel, #jobLabel, #switchLabel,
+#companyLabel, #wellLabel, #engineerLabel, #colorLabel,
+#jobNameLabel, #jobInfoLabel, #stageLabel, #updateMessageTitle {
+    -fx-font-size: 2em;
+}
+
+#updateMessage {
+    -fx-text-fill: black;
+    -fx-font-size: 2em;
+}
+
+#countdownLabel, #infoAddressLabel, #totalLabel, #releaseLabel, #plugLabel,
+#deleteLabel,#checkFireLabel, #gunCountLabel, #startSafeLabel {
+    -fx-font-size: 3em;
+}
+
+#messageLabel{
+    -fx-background-color: #929292;
+    -fx-font-size: 2.5em;
+}
+
+#shortLabel {
+    -fx-background-color: #E82C0C;
+}
+
+#voltLabel, #ampLabel, #releaseInstructionLabel, #plugInstructionLabel,
+#deleteInstructionLabel, #postReleaseInstructionLabel, #gunCountInstructionLabel {
+    -fx-font-size: 1.8em;
+}
+
+#checkFireInstructionLabel {
+    -fx-font-size: 2.3em;
+}
+
+/*---------- LIST VIEW ----------*/
+#switchList:selected {
+    -fx-text-fill: white;
+}
+
+#switchList:focused {
+    -fx-background-color: transparent;
+}
+
+.list-cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.list-cell:selected:focused {
+    -fx-background-color: black;
+}
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+/*---------- TREE VIEW ----------*/
+.tree-view {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-pref-width: 800px;
+    -fx-padding: 0 0 15 0;
+}
+
+.tree-cell {
+    -fx-font-size: 2em;
+}
+
+.tree-cell:selected {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+/*-------- SCROLL PANE --------*/
+.scroll-pane {
+    -fx-border-width: 0;
+}
+
+.scroll-pane .scroll-bar:horizontal .increment-arrow,
+.scroll-pane .scroll-bar:horizontal .decrement-arrow,
+.scroll-pane .scroll-bar:horizontal .increment-button,
+.scroll-pane .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+/*-------- PROGRESS BAR --------*/
+#saveProgressBar .bar, #updateProgressBar .bar, #addressProgress .bar {
+    -fx-background-color: #5cc941;
+}
+
+#progress .percentage {
+    -fx-fill:null;
+}
+
+#progress {
+    -fx-progress-color: #5cc941;
+}
+
+/*---------- PICKERS ----------*/
+#datePicker, #timePicker {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.8em;
+    -fx-text-fill: black;
+}
+
+/*-------- TEXT FIELDS --------*/
+.text-field {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 2em;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-text-fill: black;
+}
+
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
+
+.invalid {
+    -fx-border-color: red;
+}
+
+.valid {
+    -fx-border-color: black;
+}
+
+/*---------- CHARTS ----------*/
+.chart-content {
+    -fx-border-width: 0;
+}
+
+.chart-line-symbol {
+    -fx-background-insets: 0,0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0px;
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+#voltageChart .chart-plot-background, #checkVoltageChart .chart-plot-background  {
+    -fx-background-color: white;
+}
+
+#currentChart .chart-plot-background, #checkCurrentChart .chart-plot-background {
+    -fx-background-color: rgba(25, 25, 25, 0);
+}
+
+#voltageChart .chart-horizontal-grid-lines, #checkVoltageChart .chart-horizontal-grid-lines {
+    -fx-stroke: #a8a8a8;
+}
+
+#voltageChart .chart-vertical-grid-lines, #checkVoltageChart .chart-vertical-grid-lines {
+    -fx-stroke: rgba(25, 25, 25, 0);
+}
+
+#voltageChart .chart-vertical-zero-line, #checkVoltageChart .chart-vertical-zero-line {
+    -fx-stroke: #a8a8a8;
+}
+
+#voltageChart .chart-horizontal-zero-line, #checkVoltageChart .chart-horizontal-zero-line {
+    -fx-stroke: #a8a8a8;
+}
+
+#currentChart .chart-horizontal-grid-lines, #checkCurrentChart .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(25, 25, 25, 0);
+}
+
+#currentChart .chart-vertical-zero-line, #checkCurrentChart .chart-vertical-zero-line {
+    -fx-stroke: rgba(25, 25, 25, 0);
+}
+
+#currentChart .chart-horizontal-zero-line, #checkCurrentChart .chart-horizontal-zero-line {
+    -fx-stroke: rgba(25, 25, 25, 0);
+}
+
+#voltageChart .default-color0.chart-series-line, #checkVoltageChart .default-color0.chart-series-line {
+    -fx-stroke: black;
+    -fx-stroke-width: 3px;
+}
+
+#currentChart .default-color0.chart-series-line, #checkCurrentChart .default-color0.chart-series-line {
+    -fx-stroke: #E82C0C;
+    -fx-stroke-width: 3px;
+}
+
+.axis {
+    AXIS_COLOR: black;
+    -fx-tick-label-fill: black;
+    -fx-tick-length: 10;
+    -fx-minor-tick-length: 5;
+    -fx-text-fill: black;
+}
+
+.axis-label {
+    -fx-text-fill: black;
+}
+
+.jfx-toggle-button .jfx-rippler {
+    -fx-font-family: "BabelSans";
+    -fx-font-size: 1.5em;
+    -jfx-rippler-fill: white;
+    -jfx-rippler-radius: 0;
+}

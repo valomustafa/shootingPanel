@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="480.0" maxWidth="800.0" minHeight="480.0" minWidth="800.0" prefHeight="480.0" prefWidth="800.0" stylesheets="@../styles/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.perf.shootingPanel.controllers.AppController">
+   <children>
+      <AnchorPane fx:id="startPane" prefHeight="480.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="logoImage" fitHeight="480.0" fitWidth="1072.0" layoutX="55.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../images/splash.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="357.0" mnemonicParsing="false" onAction="#inventorySwitches" prefHeight="92.0" prefWidth="479.0" text="ADDRESSABLE MODE TEST" textAlignment="CENTER" textFill="WHITE" visible="false" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="357.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="gearButton1" disable="false" mnemonicParsing="false" onAction="#gearButtonPressed" prefHeight="46.0" prefWidth="35.0" visible="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/gear_w.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="exitButton" disable="true" layoutX="721.0" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="71.0" prefWidth="75.0" visible="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="50" visible="false" />
+               </graphic>
+            </Button>
+            <AnchorPane fx:id="startButtonPane" layoutX="30.0" layoutY="347.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <Button fx:id="newJobButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newJobButtonPressed" prefHeight="92.0" prefWidth="350.0" text="NEW JOB" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="resumeJobButton" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" mnemonicParsing="false" onAction="#resumeJobButtonPressed" prefHeight="92.0" prefWidth="350.0" text="RESUME JOB" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="startSafeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="29.0" prefHeight="39.0" prefWidth="606.0" text="PUT PANEL IN SAFE MODE" textAlignment="CENTER" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="24.0" AnchorPane.topAnchor="23.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="testPane" maxHeight="480.0" maxWidth="800.0" minHeight="480.0" minWidth="800.0" prefHeight="480.0" prefWidth="800.0">
+         <children>
+            <AnchorPane fx:id="navPane" maxHeight="80.0" maxWidth="800.0" minHeight="13.0" minWidth="800.0" prefHeight="15.0" prefWidth="800.0" />
+            <AnchorPane fx:id="shotPlotPane" layoutX="100.0" layoutY="265.0" prefHeight="215.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="255.0">
+               <StackPane layoutY="29.0" minWidth="540.0" prefHeight="200.0" prefWidth="700.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+                  <LineChart fx:id="voltageChart" prefHeight="126.0" prefWidth="668.0">
+                     <xAxis>
+                        <NumberAxis fx:id="t1Axis" side="BOTTOM" upperBound="10.0" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="vAxis" minorTickVisible="false" side="LEFT" />
+                     </yAxis>
+                     <StackPane.margin>
+                        <Insets right="32.0" />
+                     </StackPane.margin>
+                  </LineChart>
+                  <LineChart fx:id="currentChart" prefHeight="199.0" prefWidth="668.0">
+                     <xAxis>
+                        <NumberAxis fx:id="t2Axis" opacity="0.0" side="BOTTOM" upperBound="10.0" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="cAxis" minorTickVisible="false" side="RIGHT" />
+                     </yAxis>
+                     <StackPane.margin>
+                        <Insets left="32.0" />
+                     </StackPane.margin>
+                  </LineChart>
+               </StackPane>
+            </AnchorPane>
+            <AnchorPane fx:id="testContentPane" layoutX="100.0" layoutY="21.0" prefHeight="275.0" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+               <children>
+                  <HBox prefHeight="34.0" prefWidth="604.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="47.0">
+                     <children>
+                        <AnchorPane styleClass="blackBottomBorder" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="voltLabel" text="V" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <Region maxWidth="10.0" prefHeight="10.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
+                        <AnchorPane styleClass="redBottomBorder" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="ampLabel" alignment="CENTER_RIGHT" text="mA" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <Button fx:id="fireButton" disable="true" layoutX="440.0" layoutY="129.0" mnemonicParsing="false" onAction="#fireButtonPressed" prefHeight="70.0" prefWidth="320.0" text="FIRE" textFill="WHITE" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="inventoryButton" layoutX="40.0" layoutY="167.0" mnemonicParsing="false" onAction="#inventorySwitches" prefHeight="70.0" prefWidth="320.0" text="INVENTORY" textFill="WHITE" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="countdownLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="264.0" layoutY="289.0" prefHeight="34.0" text="40" textAlignment="RIGHT" AnchorPane.bottomAnchor="126.0" AnchorPane.rightAnchor="345.0" />
+                  <Button fx:id="gearButton" disable="false" layoutX="604.0" layoutY="2.0" mnemonicParsing="false" onAction="#gearButtonPressed" prefHeight="46.0" prefWidth="35.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/gear_b.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="16.0" onMouseClicked="#resetMessage" prefHeight="51.0" prefWidth="561.0" text="MESSAGES" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="10.0" />
+                  <HBox alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="252.0" prefHeight="80.0" prefWidth="312.0" spacing="10.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="343.0">
+                     <children>
+                        <Label fx:id="totalSwitchLabel" prefHeight="80.0" text="55" translateY="3.0" />
+                        <ImageView fx:id="indicator" fitHeight="31.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/openIndicator.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="infoAddressLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="45.0" text="FFFFFF" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="armButton" layoutX="340.0" layoutY="262.0" mnemonicParsing="false" onAction="#armButtonPressed" prefHeight="70.0" prefWidth="320.0" text="ARM" textFill="WHITE" AnchorPane.bottomAnchor="128.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane fx:id="safePane" layoutX="10.0" layoutY="62.0" prefHeight="398.0" prefWidth="670.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0" />
+               </children>
+            </AnchorPane>
+            <ListView fx:id="switchList" fixedCellSize="84.0" layoutY="13.0" maxHeight="467.0" maxWidth="130.0" minHeight="400.0" minWidth="100.0" onMouseClicked="#switchClicked" prefHeight="465.0" prefWidth="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="totalPane" layoutY="80.0" prefHeight="465.0" prefWidth="130.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label fx:id="totalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="210.0" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+               <font>
+                  <Font size="300.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="gearBackground" prefHeight="325.0" prefWidth="661.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="gearBar" prefHeight="75.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="ipLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="417.0" layoutY="15.0" prefHeight="30.0" prefWidth="279.0" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="date" layoutX="114.0" layoutY="15.0" prefHeight="45.0" prefWidth="264.0" text="11-24-2017  10:22:36" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="114.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="gearClose" fitHeight="50.0" fitWidth="50.0" layoutX="729.0" layoutY="13.0" onMouseClicked="#modalClose" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="13.0">
+                     <image>
+                        <Image url="@../images/close_w.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="backArrow" fitHeight="55.0" fitWidth="55.0" layoutX="25.0" layoutY="14.0" onMouseClicked="#abortPressed" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="14.0">
+                     <image>
+                        <Image url="@../images/home.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Button fx:id="updateButton" layoutX="546.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateButtonPressed" prefHeight="65.0" prefWidth="200.0" text="UPDATE" textFill="WHITE" AnchorPane.rightAnchor="54.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Line endY="175.0" layoutX="494.5" layoutY="214.0" startY="-135.0" AnchorPane.rightAnchor="305.0" />
+            <Button fx:id="exportButton" disable="true" layoutX="546.0" layoutY="330.0" mnemonicParsing="false" onAction="#saveTest" prefHeight="65.0" prefWidth="200.0" text="EXPORT TO USB" textFill="WHITE" AnchorPane.bottomAnchor="95.0" AnchorPane.rightAnchor="54.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="setTimeButton" layoutX="546.0" layoutY="242.0" mnemonicParsing="false" onAction="#setTimeButtonPressed" prefHeight="65.0" prefWidth="200.0" text="SET DATE TIME" textFill="WHITE" AnchorPane.rightAnchor="54.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <ProgressBar fx:id="updateProgressBar" layoutX="49.0" layoutY="273.0" prefHeight="18.0" prefWidth="561.0" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+            <Button fx:id="jobInfoButton" disable="true" layoutX="546.0" layoutY="88.0" mnemonicParsing="false" onAction="#jobInfoButtonPressed" prefHeight="65.0" prefWidth="200.0" text="JOB INFO" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Label fx:id="companyInfoLabel" layoutX="26.0" layoutY="104.0" prefHeight="29.0" prefWidth="457.0" text="Company Information" />
+            <Label fx:id="wellInfoLabel" layoutX="26.0" layoutY="174.0" prefHeight="29.0" prefWidth="457.0" text="Well Information" />
+            <Label fx:id="jobInfoLabel" layoutX="26.0" layoutY="140.0" prefHeight="29.0" prefWidth="457.0" text="Job Information" />
+            <ImageView fx:id="statusIcon" fitHeight="40.0" fitWidth="40.0" layoutX="434.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="434.0" />
+            <Button fx:id="checkReleaseButton" disable="true" layoutX="26.0" layoutY="330.0" mnemonicParsing="false" onAction="#checkReleaseTool" prefHeight="65.0" prefWidth="391.0" text="CHECK RELEASE TOOL" textFill="WHITE" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="26.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="checkFireButton" disable="true" layoutX="26.0" layoutY="230.0" mnemonicParsing="false" onAction="#checkFire" prefHeight="65.0" prefWidth="391.0" text="CHECK FIRE" textFill="WHITE" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="26.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="qrView" fitHeight="122.0" fitWidth="144.0" layoutX="33.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/qr.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="saveBackground" prefHeight="480.0" prefWidth="800.0" visible="false">
+         <children>
+            <AnchorPane fx:id="savePane" layoutX="70.0" layoutY="140.0" prefHeight="200.0" prefWidth="661.0">
+               <children>
+                  <AnchorPane fx:id="barPane" prefHeight="51.0" prefWidth="661.0">
+                     <children>
+                        <FontAwesomeIconView fx:id="saveClose" fill="WHITE" glyphName="CLOSE" layoutX="572.0" layoutY="36.0" onMouseClicked="#modalClose" size="45" textAlignment="RIGHT" wrappingWidth="74.5714282989502" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="saveLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="8.0" prefHeight="28.0" prefWidth="416.0" text="EXPORT TEST DATA TO USB" textAlignment="CENTER" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="dayButton" layoutX="20.0" layoutY="95.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="60.0" prefWidth="200.0" text="LAST DAY" textFill="WHITE" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="weekButton" layoutX="232.0" layoutY="95.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="60.0" prefWidth="200.0" text="LAST WEEK" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="monthButton" layoutX="441.0" layoutY="95.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="60.0" prefWidth="200.0" text="LAST MONTH" textFill="WHITE" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <ProgressBar fx:id="saveProgressBar" layoutX="23.0" layoutY="115.0" prefHeight="18.0" prefWidth="617.0" progress="0.0" visible="false" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="setTimePane" layoutX="-1.0" prefHeight="480.0" prefWidth="806.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="setTimeBar" prefHeight="60.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="dateTimeClose" fitHeight="40.0" fitWidth="40.0" layoutX="746.0" layoutY="10.0" onMouseClicked="#dateTimeClose" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                     <image>
+                        <Image url="@../images/close_w.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="setTimeDateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="21.0" prefHeight="30.0" prefWidth="380.0" text="SET DATE AND TIME" textAlignment="CENTER" textFill="WHITE" AnchorPane.topAnchor="15.0" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="saveTimeDateButton" layoutX="247.0" layoutY="374.0" mnemonicParsing="false" onAction="#saveTimeDateButtonPressed" prefHeight="55.0" prefWidth="306.0" text="SAVE" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="247.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <TextField fx:id="monthField" layoutX="23.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="Month" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="dayField" layoutX="147.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="Day" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="yearField" layoutX="270.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="Year" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="hourField" layoutX="407.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="Hour" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="minuteField" layoutX="527.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="Minute" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="ampmField" layoutX="647.0" layoutY="95.0" onMouseClicked="#textFieldFocused" prefWidth="100.0" promptText="AM/PM" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0" />
+            <GridPane fx:id="minutePane" alignment="CENTER" layoutX="40.0" layoutY="147.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="258.0" prefWidth="760.0" stylesheets="@../styles/application.css" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="140.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="0" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="1" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="2" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="3" GridPane.columnIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="4" GridPane.columnIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="5" GridPane.columnIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="6" GridPane.columnIndex="6" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="7" GridPane.columnIndex="7" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="8" GridPane.columnIndex="8" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="9" GridPane.columnIndex="9" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="10" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="11" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="12" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="13" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="14" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="15" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="16" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="17" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="18" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="19" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="20" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="21" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="22" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="23" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="24" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="25" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="26" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="27" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="28" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="29" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="30" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="31" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="32" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="33" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="34" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="35" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="36" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="37" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="38" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="39" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="40" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="41" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="42" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="43" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="44" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="45" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="46" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="47" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="48" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="49" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="50" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="51" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="52" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="53" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="54" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="55" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="56" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="57" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="58" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="59" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="dayPane" alignment="CENTER" layoutX="30.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="760.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="2" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="3" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="4" GridPane.columnIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="5" GridPane.columnIndex="4" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="6" GridPane.columnIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="7" GridPane.columnIndex="6" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="8" GridPane.columnIndex="7" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="9" GridPane.columnIndex="8" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="10" GridPane.columnIndex="9" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="11" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="12" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="13" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="14" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="15" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="16" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="17" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="18" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="19" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="20" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="21" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="22" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="23" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="24" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="25" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="26" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="27" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="28" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="29" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="30" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="60.0" styleClass="genericButton" text="31" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="monthPane" alignment="CENTER" layoutX="30.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="760.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="January" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="February" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="March" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="April" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="May" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="June" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="July" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="August" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="September" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="October" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="November" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="December" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="yearPane" alignment="CENTER" layoutX="30.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="760.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2018" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2019" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2020" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2021" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2022" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2023" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2024" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2026" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2027" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2028" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2029" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="hourPane" alignment="CENTER" layoutX="30.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="760.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="2" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="3" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="4" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="7" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="10" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="11" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="12" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <GridPane fx:id="ampmPane" alignment="CENTER" layoutX="30.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="237.0" prefWidth="760.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="AM" />
+                  <Button mnemonicParsing="false" onAction="#dateTimeButtonPressed" prefWidth="200.0" styleClass="genericButton" text="PM" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <Label layoutX="127.0" layoutY="97.0" prefHeight="18.0" prefWidth="11.0" text="-" AnchorPane.leftAnchor="127.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="BabelSans" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="247.0" layoutY="98.0" prefHeight="18.0" prefWidth="11.0" text="-" AnchorPane.leftAnchor="247.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="BabelSans" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="547.0" layoutY="96.0" prefHeight="18.0" prefWidth="11.0" text=":" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="BabelSans" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="jobInfoPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="jobBar" prefHeight="60.0" prefWidth="800.0">
+               <children>
+                  <Label fx:id="jobLabel" layoutX="353.0" layoutY="16.0" text="JOB INFO" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="modeSelectPane" prefHeight="80.0" prefWidth="800.0" visible="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button fx:id="hybridButton" alignment="CENTER" contentDisplay="CENTER" layoutX="108.0" layoutY="11.0" mnemonicParsing="false" onAction="#selectMode" prefHeight="55.0" prefWidth="350.0" styleClass="buttonUnselected" text="HYBRID MODE" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addressableButton" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="11.0" mnemonicParsing="false" onAction="#selectMode" prefHeight="55.0" prefWidth="350.0" styleClass="buttonSelected" text="ADDRESSABLE MODE" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="30.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label fx:id="companyLabel" layoutX="34.0" layoutY="84.0" text="Company" AnchorPane.rightAnchor="678.0" />
+            <Label fx:id="wellLabel" layoutX="80.0" layoutY="214.0" text="Well" AnchorPane.rightAnchor="680.0" />
+            <Label fx:id="engineerLabel" layoutX="39.0" layoutY="276.0" text="Engineer" AnchorPane.rightAnchor="679.0" />
+            <Button layoutX="33.0" layoutY="408.0" mnemonicParsing="false" onAction="#okButtonPressed" prefHeight="55.0" prefWidth="200.0" styleClass="okButton" text="OK" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="130.0" />
+            <Button layoutX="422.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="55.0" prefWidth="200.0" styleClass="cancelButton" text="CANCEL" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="130.0" />
+            <TextField fx:id="companyField" layoutX="134.0" layoutY="73.0" onMouseClicked="#textFieldFocused" prefHeight="50.0" prefWidth="617.0" promptText="REQUIRED" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="51.0" />
+            <TextField fx:id="engineerField" layoutX="134.0" layoutY="265.0" onMouseClicked="#textFieldFocused" prefHeight="50.0" prefWidth="402.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="134.0" />
+            <TextField fx:id="wellField" layoutX="134.0" layoutY="204.0" onMouseClicked="#textFieldFocused" prefHeight="50.0" prefWidth="402.0" promptText="REQUIRED" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="134.0" />
+            <Label fx:id="colorLabel" layoutX="564.0" layoutY="214.0" text="Color" AnchorPane.rightAnchor="187.0" />
+            <Button fx:id="colorButton" layoutX="640.0" layoutY="198.0" mnemonicParsing="false" onAction="#colorSelect" prefHeight="33.0" prefWidth="109.0" style="-fx-background-color: #000000;" styleClass="colorButton" AnchorPane.bottomAnchor="226.0" AnchorPane.rightAnchor="51.0" />
+            <Label fx:id="jobNameLabel" layoutX="34.0" layoutY="148.0" text="Job Name" AnchorPane.rightAnchor="673.0" />
+            <TextField fx:id="jobNameField" layoutX="134.0" layoutY="137.0" onMouseClicked="#textFieldFocused" prefHeight="50.0" prefWidth="617.0" promptText="REQUIRED" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="51.0" />
+            <Label fx:id="stageLabel" layoutX="562.0" layoutY="276.0" text="Stage" AnchorPane.rightAnchor="187.0" />
+            <TextField fx:id="stageField" alignment="CENTER" layoutX="640.0" layoutY="265.0" onMouseClicked="#textFieldFocused" prefHeight="50.0" prefWidth="109.0" AnchorPane.bottomAnchor="165.0" AnchorPane.rightAnchor="51.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="colorBackground" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane fx:id="colorPane" alignment="CENTER" layoutX="136.0" layoutY="111.0" prefHeight="258.0" prefWidth="528.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #000000;" styleClass="colorButton" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #868686;" styleClass="colorButton" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #FFFFFF;" styleClass="colorButton" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #974643;" styleClass="colorButton" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #C16C32;" styleClass="colorButton" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #C9C95A;" styleClass="colorButton" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #83CC5E;" styleClass="colorButton" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #4F6AB0;" styleClass="colorButton" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#colorConfirm" style="-fx-background-color: #886BB8;" styleClass="colorButton" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="fileChooserPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="fileOKButton" layoutX="28.0" layoutY="408.0" mnemonicParsing="false" onAction="#okButtonPressed" prefHeight="55.0" prefWidth="200.0" styleClass="okButton" text="OK" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="30.0" />
+            <Button layoutX="250.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="55.0" prefWidth="200.0" styleClass="cancelButton" text="CANCEL" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="350.0" />
+            <AnchorPane layoutX="-2.0" prefHeight="391.0" prefWidth="652.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ScrollPane fx:id="fileScrollPane" hbarPolicy="NEVER" prefHeight="391.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <Button fx:id="deleteFileButton" layoutX="577.0" layoutY="408.0" mnemonicParsing="false" onAction="#fileDeleteButtonPressed" prefHeight="55.0" prefWidth="200.0" styleClass="deleteOff" text="DELETE" AnchorPane.rightAnchor="30.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="wrtPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="103.0" prefHeight="275.0" prefWidth="615.0" style="-fx-background-color: white;">
+               <children>
+                  <AnchorPane fx:id="releaseLabelPane" prefHeight="55.0" prefWidth="615.0" style="-fx-background-color: #E82C0C;" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="releaseLabel" alignment="CENTER" layoutX="186.0" layoutY="5.0" prefHeight="34.0" prefWidth="244.0" text="WRT RELEASE" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="releaseConfirmButton" layoutX="100.0" layoutY="208.0" mnemonicParsing="false" onAction="#releaseConfirmPressed" prefHeight="39.0" prefWidth="170.0" text="CONFIRM" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="100.0" />
+                  <Button fx:id="releaseCancelButton" layoutX="345.0" layoutY="208.0" mnemonicParsing="false" onAction="#releaseCancelPressed" prefWidth="170.0" text="CANCEL" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="100.0" />
+                  <Label fx:id="releaseInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="73.0" prefHeight="122.0" prefWidth="615.0" text="Initiating the release sequence WILL release the cable head. Are you sure you want to continue?" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="updatePane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="94.0" prefHeight="275.0" prefWidth="614.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="94.0">
+               <children>
+                  <AnchorPane fx:id="updateMessagePane" prefHeight="55.0" prefWidth="615.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="updateMessageTitle" alignment="CENTER" layoutY="8.0" prefHeight="34.0" prefWidth="244.0" text="SOFTWARE UPDATE" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="updateMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="87.0" prefHeight="122.0" prefWidth="614.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="87.0" />
+                  <Button fx:id="updateOKButton" layoutX="222.0" layoutY="206.0" mnemonicParsing="false" onAction="#updateOKPressed" prefHeight="39.0" prefWidth="170.0" styleClass="okButton" text="OK" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="222.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="setFirePane" prefHeight="480.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="103.0" prefHeight="200.0" prefWidth="615.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <Label fx:id="plugInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="50.0" prefHeight="34.0" prefWidth="615.0" text="Was the plug set successfully?" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="plugYesButton" layoutX="150.0" layoutY="119.0" mnemonicParsing="false" onAction="#plugYesPressed" prefWidth="100.0" text="Yes" AnchorPane.leftAnchor="150.0" />
+                  <Button fx:id="plugNoButton" layoutX="400.0" layoutY="119.0" mnemonicParsing="false" onAction="#plugNoPressed" prefWidth="100.0" text="No" AnchorPane.rightAnchor="150.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="postReleasePane" prefHeight="200.0" prefWidth="615.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Label fx:id="postReleaseInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="50.0" prefHeight="34.0" prefWidth="615.0" text="Release Profile" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0">
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </Label>
+            <Button fx:id="postReleaseNoButton" layoutX="275.0" layoutY="127.0" mnemonicParsing="false" onAction="#postReleaseOk" prefWidth="100.0" text="OK" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="gunCountPane" layoutX="10.0" layoutY="10.0" prefHeight="480.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="103.0" prefHeight="275.0" prefWidth="615.0" style="-fx-background-color: white;">
+               <children>
+                  <AnchorPane fx:id="gunCountLabelPane" prefHeight="55.0" prefWidth="615.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="gunCountLabel" alignment="CENTER" layoutX="186.0" layoutY="5.0" prefHeight="34.0" prefWidth="244.0" text="GUN COUNT" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="gunCountInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="77.0" prefHeight="122.0" prefWidth="615.0" text="There was a gun count error. Possible solution is another inventory." textAlignment="CENTER" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="gunCountButton" layoutX="42.0" layoutY="206.0" mnemonicParsing="false" onAction="#dismissGunCountModal" prefHeight="39.0" prefWidth="160.0" styleClass="okButton" text="RETRY" AnchorPane.leftAnchor="40.0" />
+                  <Button fx:id="gunCountResetButton" layoutX="359.0" layoutY="206.0" mnemonicParsing="false" onAction="#gunCountReset" prefWidth="160.0" styleClass="okButton" text="RESET" AnchorPane.rightAnchor="40.0" />
+                  <Button fx:id="newExpectedButton" layoutX="228.0" layoutY="206.0" mnemonicParsing="false" onAction="#gunCountNewExpected" prefWidth="160.0" styleClass="okButton" text="RESUME" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="228.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="checkFirePane" layoutX="10.0" layoutY="10.0" prefHeight="480.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="103.0" prefHeight="275.0" prefWidth="615.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+               <children>
+                  <AnchorPane fx:id="checkFireLabelPane" prefHeight="55.0" prefWidth="615.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="checkFireLabel" alignment="CENTER" layoutX="186.0" layoutY="5.0" prefHeight="34.0" prefWidth="244.0" text="CHECK FIRE" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="checkFireInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="61.0" prefHeight="122.0" prefWidth="615.0" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="checkConfirmButton" layoutX="150.0" layoutY="190.0" mnemonicParsing="false" onAction="#checkFirePressed" prefWidth="150.0" text="FIRE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="150.0" />
+                  <Button fx:id="checkCancelButton" layoutX="365.0" layoutY="190.0" mnemonicParsing="false" onAction="#checkCancelPressed" prefWidth="150.0" text="Cancel" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="150.0" />
+                  <AnchorPane fx:id="checkPlotPane" layoutY="151.0" prefHeight="215.0" prefWidth="700.0">
+                     <children>
+                        <StackPane layoutY="29.0" minWidth="540.0" prefHeight="200.0" prefWidth="700.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+                           <children>
+                              <LineChart fx:id="checkVoltageChart" prefHeight="126.0" prefWidth="668.0">
+                                 <xAxis>
+                                    <NumberAxis fx:id="checkT1Axis" side="BOTTOM" upperBound="10.0" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis fx:id="checkVAxis" minorTickVisible="false" side="LEFT" />
+                                 </yAxis>
+                                 <StackPane.margin>
+                                    <Insets right="32.0" />
+                                 </StackPane.margin>
+                              </LineChart>
+                              <LineChart fx:id="checkCurrentChart" prefHeight="199.0" prefWidth="668.0">
+                                 <xAxis>
+                                    <NumberAxis fx:id="checkT2Axis" opacity="0.0" side="BOTTOM" upperBound="10.0" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis fx:id="checkCAxis" minorTickVisible="false" side="RIGHT" />
+                                 </yAxis>
+                                 <StackPane.margin>
+                                    <Insets left="32.0" />
+                                 </StackPane.margin>
+                              </LineChart>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cclPane" layoutY="15.0" prefHeight="465.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <StackPane fx:id="meterPane" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="-335.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deletePane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="93.0" layoutY="103.0" prefHeight="275.0" prefWidth="615.0" style="-fx-background-color: white;">
+               <children>
+                  <AnchorPane fx:id="deleteLabelPane" prefHeight="55.0" prefWidth="615.0" style="-fx-background-color: #E82C0C;" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="deleteLabel" alignment="CENTER" layoutX="186.0" layoutY="5.0" prefHeight="34.0" prefWidth="244.0" text="DELETE" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="deleteConfirmButton" layoutX="100.0" layoutY="208.0" mnemonicParsing="false" onAction="#deleteConfirm" prefHeight="39.0" prefWidth="170.0" text="CONFIRM" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="100.0" />
+                  <Button fx:id="deleteCancelButton" layoutX="345.0" layoutY="208.0" mnemonicParsing="false" onAction="#deleteCancel" prefWidth="170.0" text="CANCEL" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="100.0" />
+                  <Label fx:id="deleteInstructionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="73.0" prefHeight="122.0" prefWidth="615.0" text="Are you sure you would like to delete?" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

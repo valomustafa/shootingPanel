@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="cell" prefHeight="36.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.perf.shootingPanel.controllers.SwitchController">
+   <children>
+      <StackPane layoutX="14.0" prefHeight="70.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefWidth="40.0">
+               <children>
+                  <Line fx:id="wireline" endY="80.0" layoutX="15.0" stroke="#909090" strokeWidth="4.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefWidth="40.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="21.0">
+                     <image>
+                        <Image url="@../images/circle_w.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefWidth="40.0">
+               <children>
+                  <ImageView fx:id="switchIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="21.0">
+                     <image>
+                        <Image url="@../images/circle_g.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="settingOverlay" layoutX="10.0" layoutY="10.0" prefWidth="40.0" visible="false">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="21.0">
+                     <image>
+                        <Image url="@../images/set_g.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="releaseOverlay" layoutX="10.0" layoutY="10.0" prefWidth="40.0" visible="false">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="21.0">
+                     <image>
+                        <Image url="@../images/release_g.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <Label fx:id="switchLabel" layoutX="62.0" layoutY="26.0" prefHeight="28.0" prefWidth="52.0" stylesheets="@../styles/application.css" text="21" textAlignment="LEFT" AnchorPane.bottomAnchor="27.0" AnchorPane.topAnchor="26.0">
+         <font>
+            <Font name="Arial Narrow Bold" size="28.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="throughIcon" fitHeight="20.0" fitWidth="20.0" layoutX="85.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <image>
+            <Image url="@../images/down_g.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="detIcon" fitHeight="25.0" fitWidth="25.0" layoutX="84.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="5.0">
+         <image>
+            <Image url="@../images/det_g.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
